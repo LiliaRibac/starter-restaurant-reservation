@@ -10,17 +10,19 @@ const {
   hasValidDate,
   hasValidTime,
   hasValidNumber,
+  isBooked,
+  hasValidStatus,
 } = require('./reservations.validation');
 
 async function reservationExists(req, res, next) {
   const reservation = await reservationService.read(req.params.reservation_id);
   if (reservation) {
     res.locals.reservation = reservation;
-    return next;
+    return next();
   }
   next({
-    status: 400,
-    message: `Reservation ${reservation_id} cannot be found.`,
+    status: 404,
+    message: `Reservation ${req.params.reservation_id} cannot be found.`,
   });
 }
 
@@ -45,6 +47,22 @@ async function read(req, res) {
   res.json({ data });
 }
 
+async function update(req, res) {
+  const updatedReservation = {
+    ...req.body.data,
+    reservation_id: res.locals.reservation.reservation_id,
+  };
+  const data = await reservationService.update(updatedReservation);
+  res.status(200).json({ data });
+}
+
+async function updateStatus(req, res) {
+  const { status } = res.locals;
+  const { reservation_id } = res.locals.reservation;
+
+  const data = await reservationService.updateStatus(reservation_id, status);
+  res.status(200).json({ data });
+}
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [reservationExists, asyncErrorBoundary(read)],
@@ -54,6 +72,23 @@ module.exports = {
     hasValidDate,
     hasValidTime,
     hasValidNumber,
+    isBooked,
     asyncErrorBoundary(create),
   ],
+  update: [
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    hasValidDate,
+    hasValidTime,
+    hasValidNumber,
+    reservationExists,
+    hasValidStatus,
+    asyncErrorBoundary(update),
+  ],
+  updateStatus: [
+    reservationExists,
+    hasValidStatus,
+    asyncErrorBoundary(updateStatus),
+  ],
+  reservationExists,
 };

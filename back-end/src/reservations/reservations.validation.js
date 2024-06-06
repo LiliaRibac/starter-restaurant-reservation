@@ -7,8 +7,8 @@ const VALID_PROPERTIES = [
   'people',
   'status',
   'reservation_id',
-  'create_at',
-  'update_at',
+  'created_at',
+  'updated_at',
 ];
 
 function hasOnlyValidProperties(req, res, next) {
@@ -36,13 +36,13 @@ function hasRequiredProperties(req, res, next) {
     'reservation_time',
     'people',
   ];
+  const { data = {} } = req.body;
+  const missingFields = requiredFields.filter((field) => !data[field]);
 
-  const missFields = requiredFields.filter((field) => !req.body.data[field]);
-
-  if (missFields.length) {
+  if (missingFields.length) {
     return next({
       status: 400,
-      message: `Missing required field(s): ${missFields.join(', ')}`,
+      message: `Missing required field(s): ${missingFields.join(', ')}`,
     });
   }
   next();
@@ -50,7 +50,7 @@ function hasRequiredProperties(req, res, next) {
 
 function hasValidDate(req, res, next) {
   const { reservation_date, reservation_time } = req.body.data;
-  const formatDATE = new Date(`${reservation_date}T${reservation_time}`);
+  const formatDate = new Date(`${reservation_date}T${reservation_time}`);
   const day = new Date(reservation_date).getUTCDay();
 
   if (isNaN(Date.parse(reservation_date))) {
@@ -67,7 +67,7 @@ function hasValidDate(req, res, next) {
     });
   }
 
-  if (formatDATE <= new Date()) {
+  if (formatDate <= new Date()) {
     return next({
       status: 400,
       message: `We take reservation for today or a future date.`,
@@ -85,25 +85,26 @@ function hasValidTime(req, res, next) {
     });
   }
 
-  const hours = Numbers(reservation_time.split(':')[0]);
-  const minutes = Numbers(reservation_time.split(':')[1]);
+  const hours = Number(reservation_time.split(':')[0]);
+  const minutes = Number(reservation_time.split(':')[1]);
 
   if (hours < 10 || (hours === 10 && minutes < 30)) {
     return next({
       status: 400,
-      message: `Reservation must be after 10:30 AM`,
+      message: `Reservation must be after 10:30AM`,
     });
   }
   if (hours > 21 || (hours === 21 && minutes > 30)) {
     return next({
       status: 400,
-      message: `Reservation must be before 9:30 PM`,
+      message: `Reservation must be before 9:30PM`,
     });
   }
+  next();
 }
 
 function hasValidNumber(req, res, next) {
-  const { people } = req.res.data;
+  const { people } = req.body.data;
 
   if (!Number.isInteger(people) || people < 1) {
     return next({
@@ -111,6 +112,48 @@ function hasValidNumber(req, res, next) {
       message: `Invalid number of people`,
     });
   }
+  next();
+}
+
+function hasValidStatus(req, res, next) {
+  const { status } = req.body.data;
+  const currentStatus = res.locals.reservation.status;
+
+  if (currentStatus === 'finished' || currentStatus === 'canceled') {
+    return next({
+      status: 400,
+      message: `Reservation status is finished.`,
+    });
+  }
+  if (
+    status === 'booked' ||
+    status === 'seated' ||
+    status === 'finished' ||
+    status === 'cancelled'
+  ) {
+    res.locals.status = status;
+    return next();
+  }
+  next({
+    status: 400,
+    message: `Invalid status: ${status}`,
+  });
+}
+
+function isBooked(req, res, next) {
+  const { status } = req.body.data;
+
+  // if (!status) {
+  //   req.body.data.status = 'booked'; // Set like a default status to 'booked'
+  // } else if (status !== 'booked') {
+
+  if (status && status !== 'booked') {
+    return next({
+      status: 400,
+      message: `Invalid status: ${status}`,
+    });
+  }
+  next();
 }
 
 module.exports = {
@@ -119,4 +162,6 @@ module.exports = {
   hasValidDate,
   hasValidTime,
   hasValidNumber,
+  isBooked,
+  hasValidStatus,
 };
