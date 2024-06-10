@@ -47,7 +47,7 @@ function tableName(req, res, next) {
 function hasValidCapacity(req, res, next) {
   const { capacity } = req.body.data;
 
-  if (isNaN(Number(capacity)) || capacity < 1) {
+  if (typeof capacity !== 'number' || capacity < 1) {
     return next({ status: 400, message: `Invalid capacity` });
   }
   next();
