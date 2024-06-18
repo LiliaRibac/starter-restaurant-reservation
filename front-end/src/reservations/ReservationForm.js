@@ -1,7 +1,8 @@
 // src/components/ReservationForm.js
-import React from 'react';
-
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
+  const history = useHistory();
   return (
     <form onSubmit={handleSubmit} className='form-group'>
       <div className='row'>
@@ -52,7 +53,7 @@ const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
             id='reservation_date'
             name='reservation_date'
             onChange={handleChange}
-            value={reservation.reservation_date}
+            value={reservation.reservation_date ?? ''}
             className='form-control'
             required
           />

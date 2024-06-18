@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReservationForm from './ReservationForm';
+
 import { createReservation } from '../utils/api';
+
 import ErrorAlert from '../layout/ErrorAlert';
 
 const ReservationNew = () => {
@@ -9,12 +11,14 @@ const ReservationNew = () => {
     first_name: '',
     last_name: '',
     mobile_number: '',
-    reservation_data: '',
+    reservation_date: '',
     reservation_time: '',
     people: 1,
   };
 
+  const [error, setError] = useState(null);
   const history = useHistory();
+
   const [reservation, setReservations] = useState({
     ...initialReservationState,
   });
@@ -28,6 +32,16 @@ const ReservationNew = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(reservation);
+
+    try {
+      const abortController = new AbortController();
+      setError(null);
+      await createReservation(reservation, abortController.signal);
+      history.push(`/dashboard?date=${reservation.reservation_date}`);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   return (
