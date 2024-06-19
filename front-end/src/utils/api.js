@@ -111,3 +111,21 @@ export async function createTable(table, signal) {
   };
   return await fetchJson(url, options, table);
 }
+
+export async function listTables(signal) {
+  const url = `${API_BASE_URL}/tables`;
+  return await fetchJson(url, { signal });
+}
+
+// Seatings
+
+export async function putSeatingStatus(data, signal) {
+  const url = `${API_BASE_URL}/reservation/${data.reservation_id}/status`;
+  const options = {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({ data }),
+    signal,
+  };
+  return await fetchJson(url, options);
+}

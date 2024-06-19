@@ -1,4 +1,3 @@
-// src/components/ReservationForm.js
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
