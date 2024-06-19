@@ -24,9 +24,11 @@ const ReservationNew = () => {
   });
 
   const handleChange = ({ target }) => {
+    const value =
+      target.name === 'people' ? Number(target.value) : target.value;
     setReservations({
       ...reservation,
-      [target.name]: target.value,
+      [target.name]: value,
     });
   };
 
