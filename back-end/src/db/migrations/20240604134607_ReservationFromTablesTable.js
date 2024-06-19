@@ -3,13 +3,9 @@ exports.up = function (knex) {
     table.increments('table_id').primary();
     table.string('table_name').notNullable();
     table.integer('capacity').unsigned().notNullable();
-    // table
-    //   .integer('reservation_id')
-    //   .nullable()
+    table.integer('reservation_id').nullable();
     table
-      .integer('reservation_id')
-      .unsigned()
-      .default(null)
+      .foreign('reservation_id')
       .references('reservation_id')
       .inTable('reservations');
     table.boolean('occupied').defaultTo(false).notNullable();
