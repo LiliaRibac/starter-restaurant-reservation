@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import {
-  readReservation,
-  updateReservation,
-  formatReservationDate,
-  formatReservationTime,
-} from '../utils/api';
+import { readReservation, updateReservation } from '../utils/api';
+import { formatReservationDate } from '../utils/format-reservation-date';
+
+import { formatReservationTime } from '../utils/format-reservation-time';
+
 import ReservationForm from './ReservationForm';
 import ErrorAlert from '../layout/ErrorAlert';
 
