@@ -29,7 +29,7 @@ function Routes() {
       <Route exact={true} path='/reservations/new'>
         <ReservationNew />
       </Route>
-      <Route exact={true} path='/reservations/:reservation_id/edit'>
+      <Route path='/reservations/:reservation_id/edit'>
         <ReservationEdit />
       </Route>
       <Route>
