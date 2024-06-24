@@ -24,8 +24,8 @@ const TableNew = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const abortController = new AbortController();
     try {
-      const abortController = new AbortController();
       setError(null);
       await createTable(tables, abortController.signal);
       history.push('/dashboard');

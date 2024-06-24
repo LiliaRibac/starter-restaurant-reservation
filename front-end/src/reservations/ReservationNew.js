@@ -36,8 +36,8 @@ const ReservationNew = () => {
     e.preventDefault();
     // console.log(reservation);
 
+    const abortController = new AbortController();
     try {
-      const abortController = new AbortController();
       setError(null);
       await createReservation(reservation, abortController.signal);
       history.push(`/dashboard?date=${reservation.reservation_date}`);
