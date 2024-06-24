@@ -132,7 +132,7 @@ function Dashboard({ date }) {
             </tr>
           </thead>
           <tbody>
-            <DisplayTable tables={tables} />
+            <DisplayTable tables={tables} setTables={{ setTables }} />
           </tbody>
         </table>
       </div>
