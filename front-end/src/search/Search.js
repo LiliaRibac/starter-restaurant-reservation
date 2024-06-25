@@ -35,6 +35,7 @@ const Search = () => {
             <input
               type='text'
               id='mobile_number'
+              name='mobile_number'
               placeholder="Enter a customer's phone number"
               value={mobileNumber}
               className='form-control'
