@@ -64,7 +64,7 @@ function Dashboard({ date }) {
     ) {
       const abortController = new AbortController();
       try {
-        await freeTable(table_id, abortController.signal); // Use freeTable function
+        await freeTable(table_id, abortController.signal);
         const tablesList = await listTables(abortController.signal);
         setTables(tablesList);
       } catch (error) {
@@ -127,9 +127,12 @@ function Dashboard({ date }) {
               <th scope='col'>Contact Number</th>
               <th scope='col'>Date</th>
               <th scope='col'>Status</th>
-              <th scope='col'>Edit</th>
+              {/* <th scope='col'>Edit</th>
               <th scope='col'>Your Seat</th>
-              <th scope='col'>Cancel</th>
+              <th scope='col'>Cancel</th> */}
+              <th cop='col'></th>
+              <th cop='col'></th>
+              <th cop='col'></th>
             </tr>
           </thead>
           <tbody>

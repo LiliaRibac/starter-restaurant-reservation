@@ -7,7 +7,8 @@ import ReservationNew from '../reservations/ReservationNew';
 import ReservationEdit from '../reservations/ReservationEdit';
 // import ReservationSeat from '../reservations/ReservationSeat';
 // import ReservationSeat from '../reservations/ReservationSeat';
-import ReservationSeat from '../reservations/ReservationSeat';
+import { ReservationSeat } from '../reservations/ReservationSeat';
+import Search from '../search/Search';
 
 import TableNew from '../Tables/TableNew';
 
@@ -32,7 +33,9 @@ function Routes() {
       <Route exact={true} path='/reservations/:reservation_id/seat'>
         <ReservationSeat />
       </Route>
-
+      <Route exact={true} path='/search'>
+        <Search />
+      </Route>
       <Route exact={true} path='/tables/new'>
         <TableNew />
       </Route>

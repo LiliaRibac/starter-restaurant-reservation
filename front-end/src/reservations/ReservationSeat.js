@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { listTables, seatReservation } from '../utils/api';
 import ErrorAlert from '../layout/ErrorAlert';
 
-const ReservationSeat = () => {
+export const ReservationSeat = () => {
   const { reservation_id } = useParams();
   const history = useHistory();
   const [tables, setTables] = useState([]);
@@ -75,4 +75,4 @@ const ReservationSeat = () => {
   );
 };
 
-export default ReservationSeat;
+// export default ReservationSeat;

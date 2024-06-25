@@ -2,6 +2,7 @@
  * Defines the base URL for the API.
  * The default values is overridden by the `API_BASE_URL` environment variable.
  */
+import { json } from 'react-router';
 import formatReservationDate from './format-reservation-date';
 import formatReservationTime from './format-reservation-date';
 const API_BASE_URL =
@@ -98,6 +99,16 @@ export async function readReservation(reservation_id, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
+export async function updateStatus(reservation_id, status) {
+  const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify({ data: { status } }),
+    headers,
+  };
+  return await fetchJson(url, options);
+}
 ///////////// Table
 
 export async function createTable(table, signal) {
@@ -136,25 +147,6 @@ export async function freeTable(tableId, signal) {
 
 // Seatings
 
-// export async function putSeatingStatus(data, signal) {
-//   const url = `${API_BASE_URL}/reservation/${data.reservation_id}/status`;
-//   const options = {
-//     method: 'PUT',
-//     headers,
-//     body: JSON.stringify({ data }),
-//     signal,
-//   };
-//   return await fetchJson(url, options);
-// }
-
-// export async function seatReservation(reservation_id, table_id, signal) {
-//   const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
-//   return await fetchJson(url, {
-//     method: 'PUT',
-//     body: JSON.stringify({ data: { reservation_id } }),
-//     signal,
-//   });
-// }
 export async function seatReservation(reservation_id, table_id, signal) {
   const url = new URL(`${API_BASE_URL}/tables/${table_id}/seat`);
   const options = {
