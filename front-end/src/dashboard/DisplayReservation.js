@@ -1,5 +1,6 @@
 import React from 'react';
-import { putSeatingStatus } from '../utils/api';
+import { Link } from 'react-router-dom';
+import { seatReservation } from '../utils/api';
 
 async function cancelReservation(reservation_id, history) {
   if (
@@ -8,7 +9,7 @@ async function cancelReservation(reservation_id, history) {
     )
   ) {
     const abortController = new AbortController();
-    await putSeatingStatus(
+    await seatReservation(
       { reservation_id, status: 'cancelled' },
       abortController.signal
     );
@@ -51,17 +52,12 @@ const DisplayReservation = ({ reservations, history }) => {
                 </button>
               </td>
               <td>
-                <button
-                  type='button'
-                  className='btn btn-secondary'
-                  onClick={() =>
-                    history.push(
-                      `/reservations/${reservation.reservation_id}/seat`
-                    )
-                  }
+                <Link
+                  to={`/reservations/${reservation.reservation_id}/seat`}
+                  className='btn btn-primary'
                 >
                   Seat
-                </button>
+                </Link>
               </td>
               <td>
                 <button

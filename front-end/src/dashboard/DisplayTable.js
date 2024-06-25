@@ -1,46 +1,12 @@
 import React, { useState } from 'react';
-import { freeTable, listTables } from '../utils/api';
+// import { freeTable, listTables } from '../utils/api';
 import ErrorAlert from '../layout/ErrorAlert';
 import { useHistory } from 'react-router-dom';
 
-const DisplayTable = ({ tables, setTables }) => {
+const DisplayTable = ({ tables, handleFinish }) => {
   const [error, setError] = useState(null);
   const history = useHistory();
 
-  // const handleFinish = async (tableId) => {
-  //   const confirm = window.confirm(
-  //     'Is this table ready to seat new guests? This cannot be undone.'
-  //   );
-  //   if (confirm) {
-  //     const abortController = new AbortController();
-  //     setError(null);
-  //     try {
-  //       // await freeTable(tableId, abortController.signal);
-  //       // history.push('/');
-  //       if (confirm) {
-  //         await freeTable(tables.tableId, abortController.signal);
-  //         history.push('/');
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //     }
-  //   }
-  // };
-
-  const handleFinish = async (tableId) => {
-    const controller = new AbortController();
-    const confirm = window.confirm(
-      'Is this table ready to seat new guests? This cannot be undone.'
-    );
-    if (confirm) {
-      freeTable(Number(tableId), controller.signal)
-        .then(() => {
-          history.push('/');
-        })
-        .catch(setError);
-    }
-    return () => controller.abort();
-  };
   return (
     <>
       <ErrorAlert error={error} />

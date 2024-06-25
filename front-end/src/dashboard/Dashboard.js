@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { listReservations, listTables } from '../utils/api';
+import { listReservations, listTables, freeTable } from '../utils/api';
 import ErrorAlert from '../layout/ErrorAlert';
 import DisplayReservation from './DisplayReservation';
 import DisplayTable from './DisplayTable';
@@ -56,6 +56,22 @@ function Dashboard({ date }) {
     history.push(`/dashboard?date=${newDate}`);
   }
 
+  async function handleFinish(table_id) {
+    if (
+      window.confirm(
+        'Is this table ready to seat new guests? This cannot be undone.'
+      )
+    ) {
+      const abortController = new AbortController();
+      try {
+        await freeTable(table_id, abortController.signal); // Use freeTable function
+        const tablesList = await listTables(abortController.signal);
+        setTables(tablesList);
+      } catch (error) {
+        setTablesError(error);
+      }
+    }
+  }
   const reservationText = `Reservations for date ${date}`;
 
   return (
@@ -132,7 +148,11 @@ function Dashboard({ date }) {
             </tr>
           </thead>
           <tbody>
-            <DisplayTable tables={tables} setTables={{ setTables }} />
+            <DisplayTable
+              tables={tables}
+              setTables={setTables}
+              handleFinish={handleFinish}
+            />
           </tbody>
         </table>
       </div>
