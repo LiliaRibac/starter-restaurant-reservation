@@ -127,24 +127,6 @@ export async function listTables(signal) {
   return await fetchJson(url, { signal });
 }
 
-// export async function freeTable(tableId, signal) {
-//   const url = new URL(`${API_BASE_URL}/tables/${tableId}/seat`);
-//   const options = { method: 'DELETE', headers, signal };
-//   return await fetchJson(url, options, {});
-// }
-
-// export async function freeTable(tableId, signal) {
-//   const url = new URL(`${API_BASE_URL}/tables/${tableId}/seat`);
-//   const options = {
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     signal,
-//   };
-//   return await fetchJson(url, options);
-// }
-
 export async function freeTable(tableId, signal) {
   const url = new URL(`${API_BASE_URL}/tables/${tableId}/seat`);
   const options = {

@@ -74,5 +74,3 @@ export const ReservationSeat = () => {
     </div>
   );
 };
-
-// export default ReservationSeat;

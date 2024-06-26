@@ -63,6 +63,7 @@ async function updateStatus(req, res) {
   const data = await reservationService.updateStatus(reservation_id, status);
   res.status(200).json({ data });
 }
+
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [reservationExists, asyncErrorBoundary(read)],

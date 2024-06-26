@@ -52,16 +52,16 @@ const Search = () => {
       ) : (
         <div>
           <h3>Reservations</h3>
-          <ul>
+          {/* <ul>
             {reservations.map((reservation) => (
               <li key={reservation.reservation_id}>
                 {reservation.first_name} {reservation.last_name} -{' '}
                 {reservation.mobile_number}
               </li>
             ))}
-          </ul>
+          </ul> */}
 
-          {/* <div className='table-responsive'>
+          <div className='table-responsive'>
             <table className='table'>
               <thead className='thead-light'>
                 <tr>
@@ -85,7 +85,7 @@ const Search = () => {
                 />
               </tbody>
             </table>
-          </div> */}
+          </div>
         </div>
       )}
     </section>
