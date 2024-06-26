@@ -56,6 +56,28 @@ function Dashboard({ date }) {
     history.push(`/dashboard?date=${newDate}`);
   }
 
+  // async function handleFinish(table_id) {
+  //   if (
+  //     window.confirm(
+  //       'Is this table ready to seat new guests? This cannot be undone.'
+  //     )
+  //   ) {
+  //     const abortController = new AbortController();
+  //     try {
+  //       await freeTable(table_id, abortController.signal);
+  //       const tablesList = await listTables(abortController.signal);
+  //       setTables(tablesList);
+  //       setReservations((prevReservations) =>
+  //         prevReservations.filter(
+  //           (reservations) => reservations.id !== table_id
+  //         )
+  //       );
+  //     } catch (error) {
+  //       setTablesError(error);
+  //     }
+  //   }
+  // }
+
   async function handleFinish(table_id) {
     if (
       window.confirm(
