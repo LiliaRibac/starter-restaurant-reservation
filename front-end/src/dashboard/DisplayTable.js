@@ -14,11 +14,11 @@ const DisplayTable = ({ tables, handleFinish }) => {
         <tr key={table.table_id}>
           <td>{table.table_name}</td>
           <td data-table-id-status={table.table_id}>
-            {table.occupied ? 'Occupied' : 'Free'}
+            {table.reservation_id ? 'Occupied' : 'Free'}
           </td>
           <td>{table.capacity}</td>
           <td>
-            {table.occupied ? (
+            {table.reservation_id ? (
               <button
                 data-table-id-finish={table.table_id}
                 type='button'

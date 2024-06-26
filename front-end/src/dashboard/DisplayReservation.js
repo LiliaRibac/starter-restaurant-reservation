@@ -1,6 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { seatReservation } from '../utils/api';
+import { updateReservation } from '../utils/api';
+
+// async function cancelReservation(reservation_id, history) {
+//   if (
+//     window.confirm(
+//       `Do you want to cancel this reservation? This cannot be undone.`
+//     )
+//   ) {
+//     const abortController = new AbortController();
+//     await seatReservation(
+//       { reservation_id, status: 'cancelled' },
+//       abortController.signal
+//     );
+//     history.go(0);
+//     return () => abortController.abort();
+//   }
+// }
 
 async function cancelReservation(reservation_id, history) {
   if (
@@ -9,11 +25,15 @@ async function cancelReservation(reservation_id, history) {
     )
   ) {
     const abortController = new AbortController();
-    await seatReservation(
-      { reservation_id, status: 'cancelled' },
-      abortController.signal
-    );
-    history.go(0);
+    try {
+      await updateReservation(
+        { reservation_id, status: 'cancelled' },
+        abortController.signal
+      );
+      history.go(0);
+    } catch (error) {
+      console.error(error);
+    }
     return () => abortController.abort();
   }
 }
@@ -39,17 +59,12 @@ const DisplayReservation = ({ reservations, history }) => {
           {reservation.status === 'booked' && (
             <>
               <td>
-                <button
-                  type='button'
+                <Link
+                  to={`/reservations/${reservation.reservation_id}/edit`}
                   className='btn btn-secondary'
-                  onClick={() =>
-                    history.push(
-                      `/reservations/${reservation.reservation_id}/edit`
-                    )
-                  }
                 >
                   Edit
-                </button>
+                </Link>
               </td>
               <td>
                 <Link

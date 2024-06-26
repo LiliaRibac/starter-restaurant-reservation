@@ -88,7 +88,7 @@ async function seat(req, res, next) {
 
   const table = res.locals.table;
 
-  if (table.occupied) {
+  if (table.reservation_id) {
     return next({
       status: 400,
       message: `Table ${table_id} is already occupied.`,
@@ -117,7 +117,7 @@ async function seat(req, res, next) {
     });
   }
 
-  await tableService.update(table_id, { reservation_id, occupied: true });
+  await tableService.update(table_id, { reservation_id });
   await reservationService.updateStatus(reservation_id, 'seated');
 
   res.json({ data: { status: 'seated' } });
@@ -128,7 +128,7 @@ async function clear(req, res, next) {
 
   const table = res.locals.table;
 
-  if (!table.occupied) {
+  if (!table.reservation_id) {
     return next({
       status: 400,
       message: `Table ${table_id} is not occupied.`,
