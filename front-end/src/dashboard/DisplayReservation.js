@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { updateStatus } from '../utils/api';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
-async function handleUpdateStatus(reservation_id, status) {
-  const history = useHistory();
+async function HandleUpdateStatus(reservation_id, status, history) {
+  // const history = useHistory();
   const abortController = new AbortController();
   try {
     await updateStatus(reservation_id, status, abortController.signal);
@@ -18,7 +18,7 @@ async function handleUpdateStatus(reservation_id, status) {
 const DisplayReservation = ({ reservations, history }) => {
   const handleFinishReservation = async (reservation_id) => {
     if (window.confirm('Do you want to cancel this reservation?')) {
-      await handleUpdateStatus(reservation_id, 'finished', history);
+      await HandleUpdateStatus(reservation_id, 'finished', history);
     }
   };
 
