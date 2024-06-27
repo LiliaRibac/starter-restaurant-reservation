@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { listReservations } from '../utils/api';
 import DisplayReservation from '../dashboard/DisplayReservation';
+import { useHistory } from 'react-router-dom';
 
 const Search = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [reservations, setReservations] = useState([]);
   const [noResults, setNoResults] = useState(false);
+  const history = useHistory();
 
   const handleChange = (e) => {
     setMobileNumber(e.target.value);
