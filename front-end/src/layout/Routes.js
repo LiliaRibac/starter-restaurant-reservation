@@ -5,8 +5,7 @@ import NotFound from './NotFound';
 import { today } from '../utils/date-time';
 import ReservationNew from '../reservations/ReservationNew';
 import ReservationEdit from '../reservations/ReservationEdit';
-// import ReservationSeat from '../reservations/ReservationSeat';
-// import ReservationSeat from '../reservations/ReservationSeat';
+
 import { ReservationSeat } from '../reservations/ReservationSeat';
 import Search from '../search/Search';
 
