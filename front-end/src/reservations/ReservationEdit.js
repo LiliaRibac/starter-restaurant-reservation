@@ -37,7 +37,9 @@ const EditReservation = () => {
           abortController.signal
         );
         console.log(data);
-
+        // if (!data || !data.mobile_number) {
+        //   throw new Error('Invalid reservation data');
+        // }
         // Format the fetched data
         const formattedReservation = {
           ...data,

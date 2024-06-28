@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// const ReservationForm = ({
+//   reservation,
+//   handleChange,
+//   handleSubmit,
+//   formErrors,
+// }) => {
+
 const ReservationForm = ({
   reservation,
   handleChange,
@@ -7,6 +14,9 @@ const ReservationForm = ({
   formErrors,
 }) => {
   const history = useHistory();
+  if (!reservation) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit} className='form-group'>

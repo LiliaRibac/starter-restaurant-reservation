@@ -26,7 +26,7 @@ const ReservationNew = () => {
 
   const validateForm = () => {
     const errors = {};
-    const mobileRegex = /^[0-9-]+$/;
+    const mobileRegex = /^\d{3}-\d{3}-\d{4}$/;
 
     if (!mobileRegex.test(reservation.mobile_number)) {
       errors.mobile_number = 'Invalid contact number';
