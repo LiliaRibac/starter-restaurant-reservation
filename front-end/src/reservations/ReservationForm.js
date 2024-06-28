@@ -20,7 +20,7 @@ const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
         <label htmlFor='last_name' className='col'>
           Last name:
           <input
-            type='text'
+            type='number'
             id='last_name'
             name='last_name'
             onChange={handleChange}
@@ -34,7 +34,7 @@ const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
         <label htmlFor='mobile_number' className='col'>
           Mobile number:
           <input
-            type='tel'
+            type='' /////
             id='mobile_number'
             name='mobile_number'
             onChange={handleChange}

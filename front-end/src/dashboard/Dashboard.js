@@ -42,7 +42,6 @@ function Dashboard({ date }) {
     if (direction === 'back') {
       newDate.setUTCDate(newDate.getUTCDate() - 1);
     } else if (direction === 'today') {
-      // newDate.=setTime(today());
       newDate = new Date(today());
     } else if (direction === 'forward') {
       newDate.setUTCDate(newDate.getUTCDate() + 1);

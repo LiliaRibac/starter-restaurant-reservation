@@ -61,7 +61,7 @@ const DisplayReservation = ({ reservations, history }) => {
                 handleFinishReservation(reservation.reservation_id)
               }
             >
-              Finish
+              Cancel
             </button>
           </td>
         </>
