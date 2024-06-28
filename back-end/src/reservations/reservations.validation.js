@@ -68,6 +68,7 @@ function hasValidDate(req, res, next) {
   }
 
   if (formatDate < new Date()) {
+    console.log(formatDate, 'hereis ');
     return next({
       status: 400,
       message: `We take reservation for today or a future date.`,

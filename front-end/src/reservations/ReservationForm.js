@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
+const ReservationForm = ({
+  reservation,
+  handleChange,
+  handleSubmit,
+  formErrors,
+}) => {
   const history = useHistory();
+
   return (
     <form onSubmit={handleSubmit} className='form-group'>
       <div className='row'>
@@ -34,7 +40,7 @@ const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
         <label htmlFor='mobile_number' className='col'>
           Mobile number:
           <input
-            type='text'
+            type='tel'
             id='mobile_number'
             name='mobile_number'
             onChange={handleChange}
@@ -42,6 +48,9 @@ const ReservationForm = ({ reservation, handleChange, handleSubmit }) => {
             className='form-control'
             required
           />
+          {formErrors.mobile_number && (
+            <div className='text-danger'>{formErrors.mobile_number}</div>
+          )}
         </label>
       </div>
       <div className='row'>
