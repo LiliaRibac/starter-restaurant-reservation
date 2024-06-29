@@ -12,6 +12,7 @@ const {
   hasValidNumber,
   isBooked,
   hasValidStatus,
+  validateMobileNumber,
 } = require('./reservations.validation');
 
 async function reservationExists(req, res, next) {
@@ -74,6 +75,7 @@ module.exports = {
     hasValidTime,
     hasValidNumber,
     isBooked,
+    validateMobileNumber,
     asyncErrorBoundary(create),
   ],
   update: [
@@ -84,6 +86,7 @@ module.exports = {
     hasValidNumber,
     reservationExists,
     hasValidStatus,
+    validateMobileNumber,
     asyncErrorBoundary(update),
   ],
   updateStatus: [

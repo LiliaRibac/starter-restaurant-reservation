@@ -157,23 +157,18 @@ function isBooked(req, res, next) {
   next();
 }
 
-function validateMobileNumber(mobile_number) {
-  // Return 400 with invalid mobile_number message if mobile_number doesn't match proper format
-  if (/^([\d\d\d\d\d\d\d\d\d\d]{10,10})$/.test(mobile_number)) {
-    mobile_number =
-      mobile_number.substring(0, 3) +
-      '-' +
-      mobile_number.substring(3, 6) +
-      '-' +
-      mobile_number.substring(6);
+function validateMobileNumber(req, res, next) {
+  const { mobile_number } = req.body.data;
+
+  // Check if mobile number contains exactly 10 digits
+  if (!/^\d{10}$/.test(mobile_number.replace(/\D/g, ''))) {
+    return next({
+      status: 400,
+      message: 'Mobile number must contain exactly 10 digits.',
+    });
   }
-  const errors = [];
-  if (!/^([\d\d\d-\d\d\d-\d\d\d\d]{12,12})$/.test(mobile_number)) {
-    errors.push(
-      `mobile_number field must be in format of XXX-XXX-XXXX. Received ${mobile_number}.`
-    );
-  }
-  return errors.join('\n');
+
+  next();
 }
 
 module.exports = {

@@ -47,7 +47,7 @@ const ReservationForm = ({
             value={reservation.mobile_number}
             className='form-control'
             required
-            pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+            // pattern='d{3}-?\d{3}-?\d{4}'
           />
           {/* console.log(reservation.mobile_number, "bobile") */}
           {/* {formErrors.mobile_number && (
@@ -93,6 +93,7 @@ const ReservationForm = ({
             className='form-control'
             min='1'
             required
+            pattern='\d*'
           />
         </label>
       </div>
