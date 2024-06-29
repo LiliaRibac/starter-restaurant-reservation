@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// const ReservationForm = ({
-//   reservation,
-//   handleChange,
-//   handleSubmit,
-//   formErrors,
-// }) => {
-
 const ReservationForm = ({
   reservation,
   handleChange,
   handleSubmit,
-  formErrors,
+  // formErrors,
 }) => {
   const history = useHistory();
-  if (!reservation) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <form onSubmit={handleSubmit} className='form-group'>
@@ -57,10 +47,12 @@ const ReservationForm = ({
             value={reservation.mobile_number}
             className='form-control'
             required
+            pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
           />
-          {formErrors.mobile_number && (
+          {/* console.log(reservation.mobile_number, "bobile") */}
+          {/* {formErrors.mobile_number && (
             <div className='text-danger'>{formErrors.mobile_number}</div>
-          )}
+          )} */}
         </label>
       </div>
       <div className='row'>

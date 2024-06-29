@@ -17,22 +17,22 @@ const ReservationNew = () => {
   };
 
   const [error, setError] = useState(null);
-  const [formErrors, setFormErrors] = useState({});
+  // const [formErrors, setFormErrors] = useState({});
   const history = useHistory();
 
   const [reservation, setReservations] = useState({
     ...initialReservationState,
   });
 
-  const validateForm = () => {
-    const errors = {};
-    const mobileRegex = /^\d{3}-\d{3}-\d{4}$/;
+  // const validateForm = () => {
+  //   const errors = {};
+  //   const mobileRegex = /^\d{3}-\d{3}-\d{4}$/;
 
-    if (!mobileRegex.test(reservation.mobile_number)) {
-      errors.mobile_number = 'Invalid contact number';
-    }
-    return errors;
-  };
+  //   if (!mobileRegex.test(reservation.mobile_number)) {
+  //     errors.mobile_number = 'Invalid contact number';
+  //   }
+  //   return errors;
+  // };
 
   const handleChange = ({ target }) => {
     const value =
@@ -47,11 +47,11 @@ const ReservationNew = () => {
     e.preventDefault();
     // console.log(reservation);
 
-    const errors = validateForm();
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      return;
-    }
+    // const errors = validateForm();
+    // if (Object.keys(errors).length > 0) {
+    //   setFormErrors(errors);
+    //   return;
+    // }
 
     const abortController = new AbortController();
     try {
@@ -70,7 +70,7 @@ const ReservationNew = () => {
         reservation={reservation}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
-        formErrors={formErrors}
+        // formErrors={formErrors}
       />
     </section>
   );
