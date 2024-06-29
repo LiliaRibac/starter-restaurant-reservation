@@ -47,12 +47,9 @@ const ReservationForm = ({
             value={reservation.mobile_number}
             className='form-control'
             required
+            pattern='\d*'
             // pattern='d{3}-?\d{3}-?\d{4}'
           />
-          {/* console.log(reservation.mobile_number, "bobile") */}
-          {/* {formErrors.mobile_number && (
-            <div className='text-danger'>{formErrors.mobile_number}</div>
-          )} */}
         </label>
       </div>
       <div className='row'>
@@ -93,7 +90,6 @@ const ReservationForm = ({
             className='form-control'
             min='1'
             required
-            pattern='\d*'
           />
         </label>
       </div>
