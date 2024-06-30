@@ -37,9 +37,7 @@ const EditReservation = () => {
           abortController.signal
         );
         console.log(data);
-        // if (!data || !data.mobile_number) {
-        //   throw new Error('Invalid reservation data');
-        // }
+
         // Format the fetched data
         const formattedReservation = {
           ...data,
@@ -66,8 +64,13 @@ const EditReservation = () => {
   }, [reservation_id]);
 
   const handleChange = ({ target }) => {
-    const value =
-      target.name === 'people' ? Number(target.value) : target.value;
+    let value = target.value;
+    if (target.name === 'people') {
+      value = Number(value);
+    } else if (target.name === 'mobile_number') {
+      // Remove any non-numeric characters from the input
+      value = value.replace(/\D/g, '');
+    }
     setFormData({
       ...formData,
       [target.name]: value,
