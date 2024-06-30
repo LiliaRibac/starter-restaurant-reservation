@@ -47,7 +47,7 @@ const ReservationForm = ({
             value={reservation.mobile_number}
             className='form-control'
             required
-            pattern='\d*'
+            // pattern='\d*'
             // pattern='d{3}-?\d{3}-?\d{4}'
           />
         </label>
