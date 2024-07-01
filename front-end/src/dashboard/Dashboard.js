@@ -9,8 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 function Dashboard({ date }) {
   // const query = useQuery();
-  const dateParam = query.get('date');
-  if (dateParam) date = dateParam;
+  // const dateParam = query.get('date');
+  // if (dateParam) date = dateParam;
 
   const [reservations, setReservations] = useState([]);
   const [tables, setTables] = useState([]);
