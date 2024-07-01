@@ -40,13 +40,22 @@ const ReservationForm = ({
         <label htmlFor='mobile_number' className='col'>
           Mobile number:
           <input
-            type='tel'
+            // type='tel'
+            // id='mobile_number'
+            // name='mobile_number'
+            // onChange={handleChange}
+            // value={reservation.mobile_number}
+            // className='form-control'
+            // required
+
             id='mobile_number'
             name='mobile_number'
-            onChange={handleChange}
+            type='text'
+            placeholder='Mobile Number'
+            // pattern='\d{3}-\d{3}-\d{4}'
             value={reservation.mobile_number}
-            className='form-control'
-            required
+            onChange={handleChange}
+            required={true}
           />
         </label>
       </div>

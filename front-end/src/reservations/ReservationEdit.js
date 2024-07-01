@@ -67,10 +67,11 @@ const EditReservation = () => {
     let value = target.value;
     if (target.name === 'people') {
       value = Number(value);
-    } else if (target.name === 'mobile_number') {
-      // Remove any non-numeric characters from the input
-      value = value.replace(/\D/g, '');
     }
+    // } else if (target.name === 'mobile_number') {
+    //   // Remove any non-numeric characters from the input
+    //   value = value.replace(/\D/g, '');
+    // }
     setFormData({
       ...formData,
       [target.name]: value,

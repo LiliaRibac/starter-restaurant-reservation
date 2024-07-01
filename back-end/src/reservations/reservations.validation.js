@@ -157,20 +157,32 @@ function isBooked(req, res, next) {
   next();
 }
 
+// function validateMobileNumber(req, res, next) {
+//   const { mobile_number } = req.body.data;
+
+//   // Check if mobile number contains exactly 10 digits
+//   if (!/^\d{10}$/.test(mobile_number.replace(/\D/g, ''))) {
+//     return next({
+//       status: 400,
+//       message: 'Mobile number must contain exactly 10 digits.',
+//     });
+//   }
+
+//   next();
+// }
+
 function validateMobileNumber(req, res, next) {
   const { mobile_number } = req.body.data;
-
-  // Check if mobile number contains exactly 10 digits
-  if (!/^\d{10}$/.test(mobile_number.replace(/\D/g, ''))) {
-    return next({
+  const regMobileNum = /^\d{3}-\d{3}-\d{4}$/;
+  console.log('mobileNumberIsValid: ', mobile_number);
+  if (!regMobileNum.test(mobile_number)) {
+    next({
       status: 400,
-      message: 'Mobile number must contain exactly 10 digits.',
+      message: 'Must include valid mobile_number (ex. ddd-ddd-dddd).',
     });
   }
-
-  next();
+  return next();
 }
-
 module.exports = {
   hasOnlyValidProperties,
   hasRequiredProperties,
