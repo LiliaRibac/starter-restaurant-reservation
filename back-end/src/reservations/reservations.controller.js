@@ -48,13 +48,28 @@ async function read(req, res) {
   res.json({ data });
 }
 
-async function update(req, res) {
-  const updatedReservation = {
-    ...req.body.data,
-    reservation_id: res.locals.reservation.reservation_id,
-  };
-  const data = await reservationService.update(updatedReservation);
-  res.status(200).json({ data });
+// async function update(req, res) {
+//   const updatedReservation = {
+//     ...req.body.data,
+//     reservation_id: res.locals.reservation.reservation_id,
+//   };
+//   const data = await reservationService.update(updatedReservation);
+//   res.status(200).json({ data });
+// }
+
+async function update(req, res, next) {
+  try {
+    const updatedReservation = {
+      ...req.body.data,
+      reservation_id: res.locals.reservation.reservation_id,
+    };
+
+    const data = await reservationService.update(updatedReservation);
+    res.status(200).json({ data });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 }
 
 async function updateStatus(req, res) {

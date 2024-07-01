@@ -174,14 +174,14 @@ function isBooked(req, res, next) {
 function validateMobileNumber(req, res, next) {
   const { mobile_number } = req.body.data;
   const regMobileNum = /^\d{3}-\d{3}-\d{4}$/;
-  console.log('mobileNumberIsValid: ', mobile_number);
+  // console.log('mobileNumberIsValid: ', mobile_number);
   if (!regMobileNum.test(mobile_number)) {
-    next({
+    return next({
       status: 400,
-      message: 'Must include valid mobile_number (ex. ddd-ddd-dddd).',
+      message: 'Must include valid mobile_number (ex. XXX-XXX-XXXX).',
     });
   }
-  return next();
+  next();
 }
 module.exports = {
   hasOnlyValidProperties,
