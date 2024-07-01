@@ -65,6 +65,7 @@ function Dashboard({ date }) {
       const abortController = new AbortController();
       try {
         await freeTable(table_id, abortController.signal);
+        // history.goBack();
         history.go(0);
       } catch (error) {
         setTablesError(error);

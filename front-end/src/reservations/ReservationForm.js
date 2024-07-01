@@ -51,10 +51,9 @@ const ReservationForm = ({
             id='mobile_number'
             name='mobile_number'
             type='text'
-            placeholder='Mobile Number'
-            // pattern='\d{3}-\d{3}-\d{4}'
             value={reservation.mobile_number}
             onChange={handleChange}
+            className='form-control'
             required={true}
           />
         </label>
