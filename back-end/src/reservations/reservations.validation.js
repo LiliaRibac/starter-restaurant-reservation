@@ -174,7 +174,6 @@ function isBooked(req, res, next) {
 function validateMobileNumber(req, res, next) {
   const { mobile_number } = req.body.data;
   const regMobileNum = /^\d{3}-\d{3}-\d{4}$/;
-
   const regMobileNum2 = /^\d{3}\d{3}\d{4}$/;
 
   if (!regMobileNum2.test(mobile_number) && !regMobileNum.test(mobile_number)) {
