@@ -8,7 +8,7 @@ import { today } from '../utils/date-time';
 import { useHistory } from 'react-router-dom';
 
 function Dashboard({ date }) {
-  const query = useQuery();
+  // const query = useQuery();
   const dateParam = query.get('date');
   if (dateParam) date = dateParam;
 
@@ -65,7 +65,7 @@ function Dashboard({ date }) {
       const abortController = new AbortController();
       try {
         await freeTable(table_id, abortController.signal);
-        history.go(0);
+        history.goBack();
       } catch (error) {
         setTablesError(error);
       }
