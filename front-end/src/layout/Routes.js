@@ -10,8 +10,10 @@ import { ReservationSeat } from '../reservations/ReservationSeat';
 import Search from '../search/Search';
 
 import TableNew from '../Tables/TableNew';
+import useQuery from '../utils/useQuery';
 
 function Routes() {
+  const query = useQuery();
   return (
     <Switch>
       <Route exact={true} path='/'>
@@ -21,7 +23,7 @@ function Routes() {
         <Redirect to={'/dashboard'} />
       </Route>
       <Route path='/dashboard'>
-        <Dashboard date={today()} />
+        <Dashboard date={query.get('date') || today()} />
       </Route>
       <Route exact={true} path='/reservations/new'>
         <ReservationNew />
