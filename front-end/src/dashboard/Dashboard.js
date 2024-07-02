@@ -66,7 +66,8 @@ function Dashboard({ date }) {
       try {
         await freeTable(table_id, abortController.signal);
         // history.goBack();
-        history.go(0);
+        // history.go(0);
+        window.location.reload();
       } catch (error) {
         setTablesError(error);
       }
